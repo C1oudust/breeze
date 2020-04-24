@@ -82,7 +82,7 @@ export default {
 	padding-top: 100%;
 	border-radius: 50%;
 	overflow: hidden;
-	transform: translateY(-50%) scale(0.88);
+	transform: translateY(-60%) scale(0.9);
 	transform-origin: center bottom;
 	transition: all 0.6s ease;
 	.disk-cover {
