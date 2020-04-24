@@ -55,14 +55,15 @@ export default {
 		this.$nextTick(() => {
 			draw()
 		})
+
 	},
 }
 </script>
 
 <style lang="less" scoped>
 .progress {
-	padding-left: 24vw;
-	padding-right: 2.4vw;
+	padding-left: 120px;
+	padding-right: 15px;
 	height: 100%;
 	border-radius: 6px 6px 0 0;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -87,9 +88,7 @@ export default {
 		white-space: nowrap;
 	}
 	.progress-text {
-		padding-top: 2px;
-		padding-left: 2px;
-		padding-bottom: 2px;
+		padding: 6px 2px 0 2px;
 		font-size: 12px;
 		font-weight: bold;
 		color: #ccc;

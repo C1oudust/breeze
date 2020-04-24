@@ -122,6 +122,10 @@ class Player {
     return this.playList[this.playIndex] || this.emptyNode;
   }
 
+  get list() {
+    return this.playList;
+  }
+
   get position() {
     if (!this.playList.length) {
       return 0;
