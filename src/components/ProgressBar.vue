@@ -1,6 +1,8 @@
 <template>
 	<div class="progress" :class="{progressPlaying:isPlaying}">
-		<p class="progress-title">{{name | formatName }}</p>
+		<div class="wrapper">
+			<h2 :class="[{'title-scroll':canScroll},'progress-title']">{{name | formatName }}</h2>
+		</div>
 		<p class="progress-text">{{position | formatTime}} / {{duration | formatTime}}</p>
 
 		<div class="progress-line">
@@ -22,7 +24,14 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(['isPlaying'])
+		...mapState(['isPlaying']),
+		canScroll() {
+			if (this.name) {
+				return this.name.length > 18
+			}
+			else
+				return false;
+		}
 	},
 	filters: {
 		formatTime(val) {
@@ -46,13 +55,13 @@ export default {
 		this.$nextTick(() => {
 			draw()
 		})
-	}
+	},
 }
 </script>
 
 <style lang="less" scoped>
 .progress {
-	padding-left: 24.6vw;
+	padding-left: 24vw;
 	padding-right: 2.4vw;
 	height: 100%;
 	border-radius: 6px 6px 0 0;
@@ -60,15 +69,22 @@ export default {
 	transition: all 0.6s ease;
 	position: relative;
 	bottom: 30px;
-	.progress-title {
-		height: 20px;
+	.wrapper {
+		height: 25px;
 		width: 100%;
+		overflow: hidden;
+	}
+	.progress-title {
+		height: 100%;
 		padding-top: 6px;
 		font-size: 12px;
 		font-weight: bold;
-		overflow: hidden;
+	}
+
+	.title-scroll {
+		width: fit-content;
+		animation: wordsLoop 6s linear infinite normal;
 		white-space: nowrap;
-		text-overflow: ellipsis;
 	}
 	.progress-text {
 		padding-top: 2px;
@@ -92,7 +108,18 @@ export default {
 		}
 	}
 }
+
 .progressPlaying {
-	transform: translateY(-30px);
+	transform: translateY(-32px);
+}
+@keyframes wordsLoop {
+	0% {
+		transform: translateX(100%);
+		-webkit-transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+		-webkit-transform: translateX(-100%);
+	}
 }
 </style>
