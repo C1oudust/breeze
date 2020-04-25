@@ -1,24 +1,7 @@
 # breeze
 
-## Project setup
-```
-npm install
-```
+vue 制作的音乐播放器,支持本地导入音乐。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![预览](./image/music.gif)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+设计：[dribbble](https://dribbble.com/shots/4240318-Made-with-InVision-Studio-Music-Player)
