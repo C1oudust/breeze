@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+// import player from '../player';
 Vue.use(Vuex);
 
 const COVER_URL = [
@@ -13,6 +13,8 @@ export default new Vuex.Store({
   state: {
     isPlaying: false,
     coverUrl: '',
+    itemList: [],
+    current: '',
   },
   getters: {},
   mutations: {
@@ -27,6 +29,31 @@ export default new Vuex.Store({
         if (coverUrl !== state.coverUrl) {
           state.coverUrl = coverUrl;
           break;
+        }
+      }
+    },
+    updateList(state, e) {
+      if (state.itemList.length) {
+        let name = [];
+        state.itemList.forEach((item) => {
+          name.push(item.name);
+        });
+        Array.from(e).forEach((item) => {
+          if (name.indexOf(item.file.name) == -1) {
+            name.push(item.file.name);
+          }
+        });
+        state.itemList = [];
+        for (let i = 0; i < name.length; i++) {
+          state.itemList.push({ name: name[i], index: i });
+        }
+      } else {
+        for (let i = 0; i < e.length; i++) {
+          state.itemList.push({
+            name: e[i].file.name,
+            // .slice(0, e[i].file.name.length - 4)
+            index: i,
+          });
         }
       }
     },

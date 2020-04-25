@@ -33,6 +33,11 @@ export default {
 				return false;
 		}
 	},
+	watch: {
+		name() {
+			this.$store.state.current = this.name;
+		}
+	},
 	filters: {
 		formatTime(val) {
 			const min = Math.floor(val / 60)

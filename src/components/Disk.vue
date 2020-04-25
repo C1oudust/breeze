@@ -47,7 +47,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['togglePlay', 'changeCover']),
+		...mapMutations(['togglePlay', 'changeCover', 'updateList']),
 		async handleChange() {
 			const target = this.$refs.file;
 			const files = target.files || [];
@@ -57,12 +57,13 @@ export default {
 				}
 			}
 			target.value = ''
+			this.updateList(player.list);
 		}
 	},
 	mounted() {
-		player.onReady.listen(() => [
+		player.onReady.listen(() => {
 			this.changeCover()
-		])
+		})
 		player.onChange.listen(() => {
 			this.changeCover()
 		})
@@ -71,6 +72,7 @@ export default {
 		})
 		player.onPause.listen(() => {
 			this.togglePlay(false)
+
 		})
 	},
 }

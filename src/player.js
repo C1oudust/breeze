@@ -55,7 +55,6 @@ class Player {
       source: null,
       buffer: await this.readAudioBuffer(file),
     });
-
     if (isEmpty) {
       this.onReady.emit(this);
     }
@@ -124,6 +123,10 @@ class Player {
 
   get list() {
     return this.playList;
+  }
+
+  get index() {
+    return this.playIndex;
   }
 
   get position() {

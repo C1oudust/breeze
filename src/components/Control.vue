@@ -1,5 +1,5 @@
 <template>
-	<div class="control" :class="{controlPlaying:isPlaying}">
+	<div class="control">
 		<div class="control-btn control-btn-side" @click="handlePrev">
 			<i class="fa fa-backward"></i>
 		</div>
@@ -9,14 +9,31 @@
 		<div class="control-btn control-btn-side" @click="handleNext">
 			<i class="fa fa-forward" aria-hidden="true"></i>
 		</div>
+		<div class="control-btn control-btn-side" @click="handleList">
+			<i class="fa fa-list" aria-hidden="true"></i>
+		</div>
+		<transition name="fade">
+			<div v-show="showList" class="list">
+				<play-list></play-list>
+			</div>
+		</transition>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { player } from '../player'
+import PlayList from './PlayList'
 export default {
 	name: 'Control',
+	data() {
+		return {
+			showList: false
+		}
+	},
+	components: {
+		PlayList
+	},
 	computed: {
 		...mapState(['isPlaying']),
 
@@ -42,11 +59,22 @@ export default {
 				player.next();
 			}
 
+		},
+		handleList() {
+			this.showList = !this.showList;
 		}
 	},
 }
 </script>
 <style lang="less" scoped>
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
 .control {
 	display: flex;
 	height: 100%;
@@ -66,6 +94,11 @@ export default {
 	}
 	.control-btn-side {
 		font-size: 14px;
+	}
+
+	.list {
+		left: 15%;
+		margin-top: 10px;
 	}
 }
 </style>
